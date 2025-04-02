@@ -1,0 +1,31 @@
+[
+    {
+      "id": 1,
+      "name": "Sensevieria",
+      "price": 15,
+      "image": "http://localhost:5000/images/senseviera.jpg",
+      "category": "Tropicale"
+    },
+    {
+      "id": 2,
+      "name": "Géranium",
+      "price": 25,
+      "image": "http://localhost:5000/images/géeanium.jpg",
+      "category": "Tropicale"
+    },
+    {
+      "id": 3,
+      "name": "Gerbera",
+      "price": 8,
+      "image": "http://localhost:5000/images/gerbera.jpg",
+      "category": "Succulente"
+    },
+    {
+      "id": 4,
+      "name": "Mammillaria",
+      "price": 12,
+      "image": "http://localhost:5000/images/mammillaria.jpg",
+      "category": "Déco"
+    }
+  ]
+  

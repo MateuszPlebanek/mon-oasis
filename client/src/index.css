@@ -1,0 +1,39 @@
+/* index.css – Styles globaux pour l'application Mon Oasis */
+
+/* Police de base + lisibilité */
+:root {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #22543d;
+  background-color: #f9f2d9;
+}
+
+/* Liens */
+a {
+  text-decoration: none;
+  color: #2f855a;
+}
+a:hover {
+  color: #22543d;
+}
+
+/* Réinitialisation de base */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Titres */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
