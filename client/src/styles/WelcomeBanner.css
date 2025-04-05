@@ -1,3 +1,37 @@
+.big-title {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
 .welcome-header {
-    background-color: #f9f2d9;
+  background-color: #f9f2d9;
+}
+
+/* Par défaut : cacher le saut de ligne */
+.mobile-line-break {
+  display: none;
+}
+
+/* Version mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .welcome-header .text-center.mt-4 {
+    text-align: center;
+    padding: 0 1rem;
   }
+
+  .welcome-header h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .banner-subtitle {
+    font-size: 0.6rem;
+    line-height: 1.4;
+    padding: 0 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-line-break {
+    display: inline;
+  }
+}
