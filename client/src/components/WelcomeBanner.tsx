@@ -1,22 +1,28 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
 import { FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa'
+import { useNavigate, Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import '../styles/WelcomeBanner.css'
+import { CartContext } from '../contexts/CartContext'
 
 function WelcomeBanner() {
   const [showBanner, setShowBanner] = useState(true)
   const [showSearchBar, setShowSearchBar] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null) // ref pour gérer le focus manuellement
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { totalItems } = useContext(CartContext)
+  const navigate = useNavigate()
 
   // Masquer la bannière au scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) { setShowBanner(false)
-    } else {
-      setShowBanner(true)
+      if (window.scrollY > 50) {
+        setShowBanner(false)
+      } else {
+        setShowBanner(true)
+      }
     }
-    }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -38,7 +44,7 @@ function WelcomeBanner() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [showSearchBar])
 
-  // Donner le focus au champ de recherche quand il apparaît
+  // Focus sur la barre de recherche
   useEffect(() => {
     if (showSearchBar && inputRef.current) {
       inputRef.current.focus()
@@ -48,15 +54,18 @@ function WelcomeBanner() {
   return (
     <header className="welcome-header py-3 shadow-sm sticky-top">
       <div className="container d-flex justify-content-between align-items-center">
-        <div className="d-flex align-items-center gap-2">
+        <Link
+          to="/"
+          className="d-flex align-items-center gap-2 text-decoration-none"
+        >
           <img src={logo} alt="Mon Oasis" width="40" height="40" />
           <span className="h4 text-success m-0">Mon Oasis</span>
-        </div>
+        </Link>
 
         {showSearchBar ? (
           <div className="flex-grow-1 mx-4" ref={searchRef}>
             <input
-              ref={inputRef} // 👈 Ici on applique le focus
+              ref={inputRef}
               type="text"
               className="form-control"
               placeholder="Rechercher une plante..."
@@ -69,7 +78,18 @@ function WelcomeBanner() {
               style={{ cursor: 'pointer' }}
               title="Rechercher"
             />
-            <FaShoppingCart style={{ cursor: 'pointer' }} title="Panier" />
+
+<button
+  type="button"
+  className="icon-button"
+  onClick={() => navigate('/cart')}
+>
+  <FaShoppingCart title="Panier" />
+  {totalItems > 0 && (
+    <span className="cart-count">{totalItems}</span>
+  )}
+</button>
+
             <FaUser style={{ cursor: 'pointer' }} title="Connexion" />
           </div>
         )}
@@ -77,8 +97,13 @@ function WelcomeBanner() {
 
       {showBanner && (
         <div className="text-center mt-4">
-          <h1 className="big-title text-success text-center">Bienvenue sur<br /> Mon Oasis</h1>
-          <p className="text-muted banner-subtitle">Explorer notre sélection de plantes<br className="mobile-line-break" /> pour créer votre coin de verdure </p>
+          <h1 className="big-title text-success text-center">
+            Bienvenue sur<br /> Mon Oasis
+          </h1>
+          <p className="text-muted banner-subtitle">
+            Explorer notre sélection de plantes<br className="mobile-line-break" />
+            pour créer votre coin de verdure
+          </p>
         </div>
       )}
     </header>
@@ -86,4 +111,3 @@ function WelcomeBanner() {
 }
 
 export default WelcomeBanner
-
