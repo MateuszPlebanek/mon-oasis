@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { CartProvider } from './contexts/CartProvider'
 import { FavoriteProvider } from './contexts/FavoriteProvider'
+import { SearchProvider } from './contexts/SearchContext'
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
@@ -15,7 +16,9 @@ if (rootElement) {
       <BrowserRouter>
       <CartProvider>
         <FavoriteProvider>
+          <SearchProvider>
         <App />
+        </SearchProvider>
       </FavoriteProvider>
         </CartProvider>
       </BrowserRouter>
