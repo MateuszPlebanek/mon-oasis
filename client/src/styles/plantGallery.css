@@ -151,6 +151,17 @@
   font-size: 1rem;
   font-weight: 500;
 }
+
+.no-results-message {
+  text-align: center;
+  color: #6c757d; /* gris doux */
+  font-size: 1.1rem;
+  padding: 2rem 1rem;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media (min-width: 1024px) {
   .plant-gallery {
     grid-template-columns: repeat(4, 1fr);

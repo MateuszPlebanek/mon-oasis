@@ -1,31 +1,33 @@
-import { useEffect, useRef, useState, useContext } from 'react'
-import { FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa'
-import { useNavigate, Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
-import '../styles/WelcomeBanner.css'
-import CartContext from '../contexts/CartContext'
+import { useEffect, useRef, useState, useContext } from "react";
+import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
+import { useNavigate, Link } from "react-router-dom";
+import logo from "../assets/logo.png";
+import "../styles/WelcomeBanner.css";
+import CartContext from "../contexts/CartContext";
+import SearchContext  from "../contexts/SearchContext";
 
 function WelcomeBanner() {
-  const [showBanner, setShowBanner] = useState(true)
-  const [showSearchBar, setShowSearchBar] = useState(false)
-  const searchRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const { totalItems } = useContext(CartContext)
-  const navigate = useNavigate()
+  const [showBanner, setShowBanner] = useState(true);
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { totalItems } = useContext(CartContext);
+  const { setSearchTerm } = useContext(SearchContext);
+  const navigate = useNavigate();
 
   // Masquer la bannière au scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setShowBanner(false)
+        setShowBanner(false);
       } else {
-        setShowBanner(true)
+        setShowBanner(true);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Fermer la barre de recherche si on clique en dehors
   useEffect(() => {
@@ -34,22 +36,22 @@ function WelcomeBanner() {
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
       ) {
-        setShowSearchBar(false)
+        setShowSearchBar(false);
       }
-    }
+    };
 
     if (showSearchBar) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
     }
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [showSearchBar])
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showSearchBar]);
 
   // Focus sur la barre de recherche
   useEffect(() => {
     if (showSearchBar && inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
-  }, [showSearchBar])
+  }, [showSearchBar]);
 
   return (
     <header className="welcome-header py-3 shadow-sm sticky-top">
@@ -69,28 +71,29 @@ function WelcomeBanner() {
               type="text"
               className="form-control"
               placeholder="Rechercher une plante..."
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         ) : (
           <div className="d-flex gap-3 fs-5 text-success">
             <FaSearch
               onClick={() => setShowSearchBar(true)}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               title="Rechercher"
             />
 
-<button
-  type="button"
-  className="icon-button"
-  onClick={() => navigate('/cart')}
->
-  <FaShoppingCart title="Panier" />
-  {totalItems > 0 && (
-    <span className="cart-count">{totalItems}</span>
-  )}
-</button>
+            <button
+              type="button"
+              className="icon-button"
+              onClick={() => navigate("/cart")}
+            >
+              <FaShoppingCart title="Panier" />
+              {totalItems > 0 && (
+                <span className="cart-count">{totalItems}</span>
+              )}
+            </button>
 
-            <FaUser style={{ cursor: 'pointer' }} title="Connexion" />
+            <FaUser style={{ cursor: "pointer" }} title="Connexion" />
           </div>
         )}
       </div>
@@ -98,16 +101,18 @@ function WelcomeBanner() {
       {showBanner && (
         <div className="text-center mt-4">
           <h1 className="big-title text-success text-center">
-            Bienvenue sur<br /> Mon Oasis
+            Bienvenue sur
+            <br /> Mon Oasis
           </h1>
           <p className="text-muted banner-subtitle">
-            Explorer notre sélection de plantes<br className="mobile-line-break" />
+            Explorer notre sélection de plantes
+            <br className="mobile-line-break" />
             pour créer votre coin de verdure
           </p>
         </div>
       )}
     </header>
-  )
+  );
 }
 
-export default WelcomeBanner
+export default WelcomeBanner;
