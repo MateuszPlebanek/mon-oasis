@@ -3,7 +3,7 @@ import { FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa'
 import { useNavigate, Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import '../styles/WelcomeBanner.css'
-import { CartContext } from '../contexts/CartContext'
+import CartContext from '../contexts/CartContext'
 
 function WelcomeBanner() {
   const [showBanner, setShowBanner] = useState(true)
