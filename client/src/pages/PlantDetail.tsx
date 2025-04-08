@@ -1,7 +1,7 @@
 // src/pages/PlantDetail.tsx
 import { useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
-import { CartContext } from '../contexts/CartContext'
+import CartContext from '../contexts/CartContext'
 
 
 type Plant = {

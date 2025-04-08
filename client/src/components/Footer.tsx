@@ -1,6 +1,6 @@
 import '../styles/Footer.css'
 import { FaFacebook, FaPinterest, FaInstagram} from 'react-icons/fa'
-
+import { Link } from 'react-router-dom'
 function Footer() {
     return (
         <footer className="footer">
@@ -16,10 +16,10 @@ function Footer() {
                 <p className="footer-copy">© 2025 Mon Oasis - Tous droits réservé</p>
                 </div>
                 <div className="footer-right">
-                    <a href="#">Qui sommes-nous ?</a>
-                    <a href="#">Mentions légales</a>
-                    <a href="#">Politique de confidentialité</a>
-                    <a href="#">Contact</a>
+                    <Link to="/a-propos">Qui sommes-nous ?</Link>
+                    <Link to="/mentions-legales">Mentions légales</Link>
+                    <Link to="/confidentialite">Politique de confidentialité</Link>
+                    <Link to ="/contact">Contact</Link>
                     <p className="footer-contact">monoasis@projet.com</p>
                     <p className="footer-contact">+33 1 25 30 45 44</p>
                     </div>

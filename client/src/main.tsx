@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { CartProvider } from './contexts/CartContext'
+import { CartProvider } from './contexts/CartProvider'
+import { FavoriteProvider } from './contexts/FavoriteProvider'
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
@@ -13,7 +14,9 @@ if (rootElement) {
     <React.StrictMode>
       <BrowserRouter>
       <CartProvider>
+        <FavoriteProvider>
         <App />
+      </FavoriteProvider>
         </CartProvider>
       </BrowserRouter>
     </React.StrictMode>
