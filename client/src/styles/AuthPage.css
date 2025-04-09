@@ -1,0 +1,161 @@
+/* Conteneur principal */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* occupe tout l'écran */
+  background: linear-gradient(135deg, #edf7f0, #ffffff);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden; /* évite que la carte dépasse */
+}
+
+/* Carte globale */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  perspective: 1000px;
+  position: relative;
+}
+
+/* Conteneur rotatif */
+.auth-card-inner {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+/* Rotation */
+.auth-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Faces de la carte */
+.auth-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(34, 84, 61, 0.2);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+}
+
+/* Face avant */
+.auth-face.front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* Face arrière */
+.auth-face.back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Formulaire */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: #22543d;
+}
+
+.auth-form label {
+  font-weight: 500;
+  color: #333;
+}
+
+.auth-form input {
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+}
+
+.auth-form input:focus {
+  border-color: #3a9d23;
+  box-shadow: 0 0 0 2px rgba(58, 157, 35, 0.2);
+}
+
+.auth-btn {
+  background-color: #3a9d23;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #2f7a1c;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-link {
+  color: #3a9d23;
+  cursor: pointer;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  min-height: 1.5rem;
+}
+
+.success-msg {
+  color: green;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  min-height: 1.5rem;
+}
+
+/* Responsive mobile */
+@media (max-width: 500px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card-inner {
+    height: 500px;
+  }
+
+  .auth-face {
+    padding: 1.5rem;
+  }
+
+  .auth-form input,
+  .auth-btn {
+    font-size: 0.95rem;
+  }
+}

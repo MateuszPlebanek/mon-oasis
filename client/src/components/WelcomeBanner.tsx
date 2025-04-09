@@ -4,7 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "../styles/WelcomeBanner.css";
 import CartContext from "../contexts/CartContext";
-import SearchContext  from "../contexts/SearchContext";
+import SearchContext from "../contexts/SearchContext";
+import UserContext from "../contexts/UserContext"; // 👈 Import du UserContext
 
 function WelcomeBanner() {
   const [showBanner, setShowBanner] = useState(true);
@@ -13,23 +14,19 @@ function WelcomeBanner() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { totalItems } = useContext(CartContext);
   const { setSearchTerm } = useContext(SearchContext);
+  const { user } = useContext(UserContext); // 👈 On récupère l'utilisateur
   const navigate = useNavigate();
 
-  // Masquer la bannière au scroll
+  // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setShowBanner(false);
-      } else {
-        setShowBanner(true);
-      }
+      setShowBanner(window.scrollY <= 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fermer la barre de recherche si on clique en dehors
+  // Click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -39,14 +36,13 @@ function WelcomeBanner() {
         setShowSearchBar(false);
       }
     };
-
     if (showSearchBar) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showSearchBar]);
 
-  // Focus sur la barre de recherche
+  // Auto-focus
   useEffect(() => {
     if (showSearchBar && inputRef.current) {
       inputRef.current.focus();
@@ -56,10 +52,7 @@ function WelcomeBanner() {
   return (
     <header className="welcome-header py-3 shadow-sm sticky-top">
       <div className="container d-flex justify-content-between align-items-center">
-        <Link
-          to="/"
-          className="d-flex align-items-center gap-2 text-decoration-none"
-        >
+        <Link to="/" className="d-flex align-items-center gap-2 text-decoration-none">
           <img src={logo} alt="Mon Oasis" width="40" height="40" />
           <span className="h4 text-success m-0">Mon Oasis</span>
         </Link>
@@ -93,7 +86,25 @@ function WelcomeBanner() {
               )}
             </button>
 
-            <FaUser style={{ cursor: "pointer" }} title="Connexion" />
+            {user ? (
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => navigate("/mon-compte")}
+                title="Mon compte"
+              >
+                <FaUser />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => navigate("/auth")}
+                title="Connexion"
+              >
+                <FaUser />
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -101,12 +112,10 @@ function WelcomeBanner() {
       {showBanner && (
         <div className="text-center mt-4">
           <h1 className="big-title text-success text-center">
-            Bienvenue sur
-            <br /> Mon Oasis
+            Bienvenue sur<br /> Mon Oasis
           </h1>
           <p className="text-muted banner-subtitle">
-            Explorer notre sélection de plantes
-            <br className="mobile-line-break" />
+            Explorer notre sélection de plantes<br className="mobile-line-break" />
             pour créer votre coin de verdure
           </p>
         </div>
