@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 import "../styles/WelcomeBanner.css";
 import CartContext from "../contexts/CartContext";
 import SearchContext from "../contexts/SearchContext";
-import UserContext from "../contexts/UserContext"; // 👈 Import du UserContext
+import { UserContext } from "../contexts/UserContext"; // 👈 Import du UserContext
 
 function WelcomeBanner() {
   const [showBanner, setShowBanner] = useState(true);

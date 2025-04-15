@@ -7,12 +7,12 @@ Ce projet est réalisé dans le cadre de la formation **Développeur Web & Web M
 
 ## 🖥️ Fonctionnalités principales
 
-- 🪴 Catalogue de plantes avec filtres par catégories
-- 🛒 Système de panier (ajout, suppression, total dynamique)
-- 💚 Ajout aux favoris (icône cœur cliquable)
+- 🪴 Catalogue dynamique de plantes (filtrage par catégorie, tri, recherche)
+- 🛒 Panier dynamique (ajout, suppression, total mis à jour automatiquement)
+- 💚 Système de favoris (icône cœur cliquable, stocké côté base)
 - 🔍 Barre de recherche
-- 🔐 Authentification utilisateur sécurisée (bcrypt + JWT)
-- 📄 Page produit individuelle avec description détaillée
+- 🔐 Authentification sécurisée avec token JWT + cookies httpOnly
+- 📄 Page "Mon compte" avec historique des achats et liste des favoris
 - 🧾 Formulaire de contact
 - 🧑‍💼 Espace utilisateur : connexion, inscription
 - 🛠️ Espace administrateur pour la gestion des produits (ajout, modification, suppression)
@@ -23,7 +23,7 @@ Ce projet est réalisé dans le cadre de la formation **Développeur Web & Web M
 
 ### Front-end
 
-- React
+- React + TypeScript
 - CSS Modules / Figma (maquettes)
 - Context API / State management
 - React Router
@@ -34,9 +34,10 @@ Ce projet est réalisé dans le cadre de la formation **Développeur Web & Web M
 - Node.js & Express  
 - MySQL (base de données relationnelle)  
 - JWT pour l’authentification sécurisée  
-- Bcrypt pour le hashage des mots de passe  
+- argon2 (hashage des mots de passe)
 - Dotenv pour gérer les variables d’environnement  
-- CORS pour autoriser les requêtes cross-origin  
+- CORS pour autoriser les requêtes cross-origin
+-httpOnly cookies (stockage sécurisé des tokens)  
 - **Middlewares Express** :
   - `express.json()` pour parser les données JSON  
   - Middleware JWT pour sécuriser les routes protégées  
@@ -50,14 +51,16 @@ Ce projet est réalisé dans le cadre de la formation **Développeur Web & Web M
 
 Mon Oasis utilise une méthode sécurisée pour la gestion des utilisateurs :
 
-- `bcrypt` : les mots de passe sont hashés avant d’être stockés
-- `jsonwebtoken` : un token est généré à la connexion pour sécuriser l’accès aux routes
-- `dotenv` : les variables sensibles sont cachées (comme la clé secrète JWT)
+- Les mots de passe sont hashés avec argon2
+- Un token JWT est généré à la connexion
+- Ce token est stocké dans un cookie httpOnly, inaccessible via JavaScript
+-Un middleware Express (authenticateToken) protège les routes sensibles
 
 🔐 **Flux :**
 1. L'utilisateur s'inscrit → son mot de passe est hashé
-2. Il se connecte → un JWT lui est attribué
+2. Il se connecte → un JWT est généré et envoyé dans un cookie
 3. Le token est ensuite utilisé pour accéder aux routes protégées
+4.Ce cookie est utilisé automatiquement à chaque requête API protégée
 
 ---
 
@@ -88,6 +91,7 @@ DB_USER=root
 DB_PASSWORD=ton_mdp
 DB_NAME=mon_oasis_db
 JWT_SECRET=un_secret_tres_long
+NODE_ENV=development
 
 📄 Licence
 

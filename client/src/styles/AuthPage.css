@@ -139,6 +139,12 @@
   margin-top: 0.5rem;
   min-height: 1.5rem;
 }
+.auth-logo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
 
 /* Responsive mobile */
 @media (max-width: 500px) {
