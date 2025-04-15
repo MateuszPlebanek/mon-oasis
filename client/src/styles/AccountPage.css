@@ -1,147 +1,181 @@
-.auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
-  background: linear-gradient(135deg, #edf7f0, #ffffff);
+.account-page {
+  max-width: 1100px;
+  margin: 8rem auto 6rem;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 100vh;
 }
 
-/* Carte */
-.auth-card {
-  width: 100%;
-  max-width: 400px;
-  height: 500px; /* ❗️NE PAS METTRE auto même en responsive */
-  perspective: 1000px;
-  position: relative;
-}
-
-.auth-card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transition: transform 0.8s ease;
-  transform-style: preserve-3d;
-}
-
-.auth-card.flipped .auth-card-inner {
-  transform: rotateY(180deg);
-}
-
-/* Faces */
-.auth-face {
+.account-logo {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  backface-visibility: hidden;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(34, 84, 61, 0.2);
-  padding: 2rem;
+  top: 2rem;
+  left: 2rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+}
+.account-logo img {
+  width: 40px;
+  height: 40px;
+}
+.account-logo span {
+  margin-left: 0.5rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #22543d;
+  text-transform: uppercase;
 }
 
-.auth-face.front {
-  transform: rotateY(0deg);
-  z-index: 2;
-}
-
-.auth-face.back {
-  transform: rotateY(180deg);
-  z-index: 1;
-}
-
-/* Formulaire */
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.auth-form h2 {
+h2 {
   text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 5rem;
+}
+
+.account-cards {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.account-card {
+  background-color: #f7faf7;
+  border-radius: 16px;
+  padding: 2rem;
+  flex: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  margin-bottom: 1rem;
+}
+.card-header p {
+  margin: 0.3rem 0;
+}
+
+.account-card button {
+  background-color: #2f855a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.card-body {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid #c6f6d5;
+}
+
+.card-body input {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.card-body input[type="date"] {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.card-body label {
+  margin-top: 1rem;
+  font-weight: 500;
   color: #22543d;
 }
 
-.auth-form label {
+.card-body button {
+  align-self: flex-end;
+  background-color: #2f855a;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+  cursor: pointer;
   font-weight: 500;
-  color: #333;
+}
+.card-body select {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f7faf7;
+  font-size: 1rem;
 }
 
-.auth-form input {
-  padding: 0.6rem;
+
+.order-item {
+  display: flex;
+  align-items: center;
+  background-color: #f0fdf4;
+  border: 1px solid #c6f6d5;
   border-radius: 10px;
+  padding: 0.8rem;
+  gap: 1rem;
+}
+
+.order-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.logout-btn {
+  margin: 2rem auto 0;
+  display: block;
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.input-like {
+  padding: 0.7rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
-  outline: none;
+  background-color: #fff;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath fill='%2322543d' d='M5.516 7.548L10 12.033l4.484-4.485 1.06 1.06-5.545 5.546-5.546-5.545z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
 }
-
-.auth-form input:focus {
-  border-color: #3a9d23;
-  box-shadow: 0 0 0 2px rgba(58, 157, 35, 0.2);
+.phone-fields {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
-
-.auth-btn {
-  background-color: #3a9d23;
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+.birthdate-fields {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
-
-.auth-btn:hover {
-  background-color: #2f7a1c;
+.birthdate-fields select {
+  flex: 1;
 }
-
-.auth-switch {
-  text-align: center;
-  font-size: 0.9rem;
+phone-fields select,
+.phone-fields input {
+  flex: 1;
 }
-
-.auth-link {
-  color: #3a9d23;
-  cursor: pointer;
-  font-weight: 600;
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-.auth-link:hover {
-  text-decoration: underline;
-}
-
-.error-msg {
-  color: red;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.success-msg {
-  color: green;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-/* ✅ Responsive : PAS de height:auto sinon ça casse la rotation */
-@media (max-width: 500px) {
-  .auth-container {
-    padding: 1rem;
-  }
-
-  .auth-face {
-    padding: 1.2rem;
-  }
-
-  .auth-form input,
-  .auth-btn {
-    font-size: 0.95rem;
+@media (max-width: 768px) {
+  .account-cards {
+    flex-direction: column;
   }
 }

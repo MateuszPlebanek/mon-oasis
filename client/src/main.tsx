@@ -8,14 +8,14 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { CartProvider } from './contexts/CartProvider'
 import { FavoriteProvider } from './contexts/FavoriteProvider'
 import { SearchProvider } from './contexts/SearchContext'
-import { UserProvider } from './contexts/UserContext' // 👈 Ajout ici
+import { UserProvider } from './contexts/UserProvider'
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <BrowserRouter>
-        <UserProvider> {/* 👈 Contexte utilisateur ajouté ici */}
+        <UserProvider> 
           <CartProvider>
             <FavoriteProvider>
               <SearchProvider>

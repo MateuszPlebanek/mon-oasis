@@ -34,7 +34,7 @@ function FilterModal({ onClose, selectedCategory, onCategoryChange }: Props) {
               name="category"
               value=""
               checked={selectedCategory === ''}
-              onChange={(e) => onCategoryChange('')}
+              onChange={() => onCategoryChange('')}
             />
             Toutes les catégories
           </label>
