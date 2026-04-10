@@ -49,8 +49,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
   res.cookie("authToken", token, {
     httpOnly: true,
-    sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
+    secure: true,
     maxAge: 1000 * 60 * 60 * 2, // 2h
   });
 
@@ -64,8 +64,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 const logout = (req: Request, res: Response) => {
   res.clearCookie("authToken", {
     httpOnly: true,
-    sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
+    secure: true,
   });
 
   res.status(200).json({ message: "Déconnexion réussie" });

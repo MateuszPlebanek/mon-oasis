@@ -1,90 +1,92 @@
 # 🌿 Mon Oasis
 
-Bienvenue sur **Mon Oasis**, un site e-commerce moderne dédié à la vente de plantes d’intérieur.  
-Ce projet est réalisé dans le cadre de la formation **Développeur Web & Web Mobile** à la Wild Code School.
+Welcome to **Mon Oasis**, a modern e-commerce website dedicated to indoor plants.  
+This project was created as part of the **Développeur Web & Web Mobile** training program at Wild Code School.
 
 ---
 
-## 🖥️ Fonctionnalités principales
+## 🖥️ Main Features
 
-- 🪴 Catalogue dynamique de plantes (filtrage par catégorie, tri, recherche)
-- 🛒 Panier dynamique (ajout, suppression, total mis à jour automatiquement)
-- 💚 Système de favoris (icône cœur cliquable, stocké côté base)
-- 🔍 Barre de recherche
-- 🔐 Authentification sécurisée avec token JWT + cookies httpOnly
-- 📄 Page "Mon compte" avec historique des achats et liste des favoris
-- 🧾 Formulaire de contact
-- 🧑‍💼 Espace utilisateur : connexion, inscription
-- 🛠️ Espace administrateur pour la gestion des produits (ajout, modification, suppression)
+- 🪴 Dynamic plant catalog with category filtering, sorting, and search
+- 🛒 Dynamic shopping cart with automatic total updates. 
+- 💚 Favorites system with clickable heart icons, stored in the database
+- 🔍 Search bar
+- 🔐 Secure authentication with JWT tokens and httpOnly cookies
+- 📄 "My Account" page with purchase history and favorites list
+- 🧾 Contact form
+- 🧑‍💼 User area for sign up and login
+- 🛠️ Admin area for product management (create, update, delete)
 
 ---
 
-## 🧑‍💻 Stack technique
+## 🧑‍💻 Tech Stack
 
 ### Front-end
 
 - React + TypeScript
-- CSS Modules / Figma (maquettes)
+- CSS 
 - Context API / State management
 - React Router
-- Figma (pour les maquettes)
+- Figma for UI mockups
 
 ### Back-end
 
 - Node.js & Express  
-- MySQL (base de données relationnelle)  
-- JWT pour l’authentification sécurisée  
-- argon2 (hashage des mots de passe)
-- Dotenv pour gérer les variables d’environnement  
-- CORS pour autoriser les requêtes cross-origin
--httpOnly cookies (stockage sécurisé des tokens)  
-- **Middlewares Express** :
-  - `express.json()` pour parser les données JSON  
-  - Middleware JWT pour sécuriser les routes protégées  
-  - Middleware d’authentification utilisateur  
-  - Middleware de gestion des erreurs
-  - Middleware de vérification des rôles pour l’accès à l’espace admin ✅
+- MySQL 
+- JWT for secure authentication  
+- argon2 for password hashing
+- dotenv for environment variable management  
+- CORS for cross-origin requests
+- httpOnly cookies for secure token storage
+
+**Middlewares Express** :
+
+  - `express.json()` for parsing JSON data 
+  - JWT middleware to protect private routes 
+  - Authentication middleware 
+  - Error handling middleware
+  - Role-checking middleware for admin access
 
 ---
 
-## 🔐 Authentification
+## 🔐 Authentication
 
-Mon Oasis utilise une méthode sécurisée pour la gestion des utilisateurs :
+Mon Oasis uses a secure authentication flow :
 
-- Les mots de passe sont hashés avec argon2
-- Un token JWT est généré à la connexion
-- Ce token est stocké dans un cookie httpOnly, inaccessible via JavaScript
--Un middleware Express (authenticateToken) protège les routes sensibles
+- Passwords are hashed with `argon2`
+- A JWT token is generated on login
+- The token is stored in an `httpOnly` cookie, inaccessible from JavaScript
+- An Express middleware (`authenticateToken`) protects sensitive routes
 
-🔐 **Flux :**
-1. L'utilisateur s'inscrit → son mot de passe est hashé
-2. Il se connecte → un JWT est généré et envoyé dans un cookie
-3. Le token est ensuite utilisé pour accéder aux routes protégées
-4.Ce cookie est utilisé automatiquement à chaque requête API protégée
+🔐 **Authentication Flow :**
+1. The user signs up and the password is hashed
+2. The user logs in and receives a JWT in an httpOnly cookie
+3. The token is used to access protected routes
+4. The cookie is automatically sent with protected API requests
 
 ---
 
-## 🔧 Installation et lancement du projet
+## 🔧 Installation and Run the Project
 
-1. **Cloner le repository**
+1. **Clone the repository**
 ```bash
 git clone https://github.com/MateuszPlebanek/mon-oasis.git
 cd mon-oasis
 
-Configuration de la base de données :
+Run the migration script from the server side :
 npm run db:migrate
 
-2.Installation du client
+2.Start the client
 cd client
 npm install
 npm run dev
 
-3.Installation du serveur
+3.Start the server
 cd ../server
 npm install
 npm run dev
 
-⚠️ Crée un fichier .env dans server/ avec :
+⚠️ Create a .env file inside the server/ folder with the following variables :
 PORT=5000
 DB_HOST=localhost
 DB_USER=root
@@ -96,6 +98,6 @@ NODE_ENV=development
 📄 Licence
 
 📌 Mentions
-Ce projet est réalisé dans un cadre pédagogique dans le cadre de la formation Développeur Web & Web Mobile à la Wild Code School.
-Il n’est pas destiné à un usage commercial.
+This project was created for educational purposes as part of the Web and Mobile Web Developer training program at Wild Code School.
+It is not intended for commercial use.
 
