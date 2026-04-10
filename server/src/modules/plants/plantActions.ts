@@ -12,16 +12,9 @@ const browse = async (_req: Request, res: Response) => {
   }
 }
 
-const read = async (req: Request, res: Response) => {
+const read = async (req: Request<{ id: string }>, res: Response) => {
   try {
-    const idParam = req.params.id
-
-    if (!idParam) {
-      res.status(400).json({ message: 'ID de plante manquant' })
-      return
-    }
-
-    const id = Number.parseInt(idParam, 10)
+    const id = Number.parseInt(req.params.id, 10)
 
     if (Number.isNaN(id)) {
       res.status(400).json({ message: 'ID de plante invalide' })
