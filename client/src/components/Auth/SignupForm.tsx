@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_URL } from '../../services/api';
 
 type Props = {
   onFlip: () => void;
@@ -38,7 +39,7 @@ function SignupForm({ onFlip }: Props) {
     }
 
     try {
-      const response = await fetch('http://localhost:5002/api/signup', {
+      const response = await fetch(`${API_URL}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,8 +52,6 @@ function SignupForm({ onFlip }: Props) {
       if (response.ok) {
         setSuccessMsg('🎉 Compte créé avec succès. Vous pouvez maintenant vous connecter.');
 
-        // ❌ Pas de onFlip automatique ici
-        // 👉 L'utilisateur cliquera lui-même sur "Se connecter"
       } else {
         setErrorMsg(data.message || "Erreur lors de l'inscription.");
       }

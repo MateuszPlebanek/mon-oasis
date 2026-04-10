@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import CartContext from "../contexts/CartContext";
 import "../styles/Cart.css";
+import { API_URL } from "../services/api";
 
 function Cart() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -9,12 +10,12 @@ function Cart() {
 
   const handlePlaceOrder = async () => {
     try {
-      const res = await fetch("http://localhost:5002/api/orders", {
+      const res = await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // ✅ Nécessaire pour envoyer le cookie JWT
+        credentials: "include", 
         body: JSON.stringify({
           cartItems: cart.map((item) => ({
             plantId: item.id,
@@ -47,7 +48,7 @@ function Cart() {
             {cart.map((item) => (
               <li key={item.id} className="cart-item">
                 <img
-                  src={`http://localhost:5002/images/${item.image}`}
+                  src={`${API_URL}/images/${item.image}`}
                   alt={item.name}
                 />
                 <div>

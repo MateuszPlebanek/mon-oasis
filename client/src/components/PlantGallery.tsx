@@ -4,9 +4,10 @@ import { FaHeart } from "react-icons/fa";
 import { BiFilter, BiSortAlt2 } from "react-icons/bi";
 import FavoriteContext from "../contexts/FavoriteContext";
 import SortFilterModal from "./SortFilterModal";
-import FilterModal from "./FilterModal"; // 👈 nouveau fichier à créer
+import FilterModal from "./FilterModal"; 
 import SearchContext from "../contexts/SearchContext";
 import "../styles/PlantGallery.css";
+import { API_URL } from "../services/api";
 
 type Plant = {
   id: number;
@@ -46,7 +47,7 @@ function PlantGallery() {
   }, [columns]);
 
   useEffect(() => {
-    fetch("http://localhost:5002/api/plants")
+    fetch(`${API_URL}/api/plants`)
       .then((res) => res.json())
       .then((data) => setPlants(data))
       .catch((error) => console.error("Erreur fetch:", error));
@@ -55,14 +56,16 @@ function PlantGallery() {
   const handleShowMore = () => {
     setVisibleCount((prev) => prev + columns * 3);
   };
+  const safeSearchTerm = (searchTerm || "").trim().toLowerCase();
 
   const filteredPlants = selectedCategory
     ? plants.filter((plant) => plant.category === selectedCategory)
     : plants;
 
-  const searchedPlants = filteredPlants.filter((plant) =>
-    plant.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const searchedPlants = safeSearchTerm ? filteredPlants.filter((plant) =>
+    plant.name.toLowerCase().includes(searchTerm),
+  )
+  : filteredPlants;
 
   const sortedPlants = [...searchedPlants].sort((a, b) => {
     if (sortOption === "asc") return a.price - b.price;
@@ -118,7 +121,7 @@ function PlantGallery() {
             <Link to={`/plant/${plant.id}`}>
               <div className="plant-image-wrapper">
                 <img
-                  src={`http://localhost:5002/images/${plant.image}`}
+                  src={`${API_URL}/images/${plant.image}`}
                   alt={plant.name}
                 />
                 <div className="overlay">Voir l'article</div>
