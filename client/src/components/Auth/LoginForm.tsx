@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
+import { API_URL } from "../../services/api";
 
 type Props = {
   onFlip: () => void;
@@ -18,7 +19,7 @@ function LoginForm({ onFlip }: Props) {
     setSuccessMsg('');
 
     try {
-      const response = await fetch('http://localhost:5002/api/login', {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         credentials: 'include',
         headers: {

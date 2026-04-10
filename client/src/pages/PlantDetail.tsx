@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import CartContext from '../contexts/CartContext'
+import { API_URL } from '../services/api'
 
 
 type Plant = {
@@ -20,7 +21,7 @@ function PlantDetail() {
   const { addToCart } = useContext(CartContext)
 
   useEffect(() => {
-    fetch(`http://localhost:5002/api/plants/${id}`)
+    fetch(`${API_URL}/api/plants/${id}`)
       .then((res) => res.json())
       .then((data) => setPlant(data))
   }, [id])
@@ -30,7 +31,7 @@ function PlantDetail() {
   return (
     <div className='plant-detail container py-5 text-center'>
       <img
-        src={`http://localhost:5002/images/${plant.image}`}
+        src={`${API_URL}/images/${plant.image}`}
         alt={plant.name}
         className='img-fluid rounded mb-3'
         style={{ maxWidth: '400px' }}

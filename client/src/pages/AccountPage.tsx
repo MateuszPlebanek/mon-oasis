@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import ChangePasswordModal from "../components/ChangePasswordModal";
 import "../styles/AccountPage.css";
 import logo from "../assets/logo.png";
+import { API_URL } from "../services/api";
 
 type Order = {
   id: number;
@@ -46,7 +47,6 @@ function AccountPage() {
     if (!user) fetchUser();
   }, [user, fetchUser]);
 
-  // 2. Pré-remplissage du formulaire avec les données utilisateur
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
@@ -82,7 +82,7 @@ function AccountPage() {
     setShowOrders((prev) => !prev);
     if (!showOrders) {
       try {
-        const res = await fetch("http://localhost:5002/api/orders", {
+        const res = await fetch(`${API_URL}/api/orders`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -101,7 +101,7 @@ function AccountPage() {
 
   const handleSaveProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5002/api/user/profile", {
+      const res = await fetch(`${API_URL}/api/user/profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -336,7 +336,7 @@ function AccountPage() {
               {orders.map((order) => (
                 <div key={order.id} className="order-item">
                   <img
-                    src={`http://localhost:5002/images/${order.image}`}
+                    src={`${API_URL}/images/${order.image}`}
                     alt={order.name}
                   />
                   <div>

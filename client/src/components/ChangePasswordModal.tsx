@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi"; // 👁️ pro icons
 import "../styles/ChangePasswordModal.css";
+import { API_URL } from "../services/api";
 
 interface Props {
   onClose: () => void;
@@ -23,7 +24,7 @@ export default function ChangePasswordModal({ onClose }: Props) {
 
     try {
       const res = await fetch(
-        "http://localhost:5002/api/user/change-password",
+        `${API_URL}/api/user/change-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
