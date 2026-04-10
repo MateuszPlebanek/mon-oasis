@@ -10,7 +10,7 @@
     "db:migrate": "ts-node ./bin/migrate.ts"
   },
   "engines": {
-    "node": ">=22.x"
+    "node": "22.x"
   },
   "keywords": [],
   "author": "",

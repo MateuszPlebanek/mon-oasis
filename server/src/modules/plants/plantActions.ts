@@ -2,7 +2,7 @@
 import type { Request, Response } from 'express'
 import plantRepository from './plantRepository'
 
-const browse = async (req: Request, res: Response) => {
+const browse = async (_req: Request, res: Response) => {
   try {
     const plants = await plantRepository.browse()
     res.json(plants)
@@ -14,8 +14,22 @@ const browse = async (req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const id = Number.parseInt(req.params.id, 10)
+    const idParam = req.params.id
+
+    if (!idParam) {
+      res.status(400).json({ message: 'ID de plante manquant' })
+      return
+    }
+
+    const id = Number.parseInt(idParam, 10)
+
+    if (Number.isNaN(id)) {
+      res.status(400).json({ message: 'ID de plante invalide' })
+      return
+    }
+
     const plant = await plantRepository.read(id)
+
     if (plant) res.json(plant)
     else res.status(404).json({ message: 'Plante non trouvée' })
   } catch (error) {
