@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT * FROM ORDER BY id ASC");
+    const [rows] = await pool.query("SELECT * FROM plantsORDER BY id ASC");
     res.json(rows);
   } catch (error) {
     console.error("Erreur de la récupération des plantes", error);
