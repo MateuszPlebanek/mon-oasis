@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "build": "tsc",
-    "start": "node dist/main.js",
+    "start": "node dist/src/main.js",
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "db:migrate": "ts-node ./bin/migrate.ts"
   },
