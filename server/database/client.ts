@@ -5,6 +5,12 @@ dotenv.config();
 
 const jawsdbUrl = process.env.JAWSDB_URL;
 
+console.log('DATABASE CLIENT JAWSDB detected:', Boolean(jawsdbUrl));
+console.log(
+  'DATABASE CLIENT target:',
+  jawsdbUrl ? new URL(jawsdbUrl).hostname : process.env.DB_HOST || 'localhost',
+);
+
 const pool = jawsdbUrl
   ? (() => {
       const url = new URL(jawsdbUrl);
