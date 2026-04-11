@@ -2,12 +2,8 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const sqlFileArg = process.argv[2];
 
@@ -37,7 +33,7 @@ const pool = mysql.createPool({
 });
 
 const run = async () => {
-  const absolutePath = path.resolve(__dirname, "..", sqlFileArg);
+  const absolutePath = path.resolve(process.cwd(), sqlFileArg);
   const rawSql = await fs.readFile(absolutePath, "utf-8");
 
   const cleanedSql = rawSql
