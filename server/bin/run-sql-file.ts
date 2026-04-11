@@ -52,7 +52,7 @@ const run = async () => {
     for (const statement of statements) {
       await connection.query(statement);
     }
-    console.log(`SQL file executed successfully: ${sqlFileArg}`);
+    console.info(`SQL file executed successfully: ${sqlFileArg}`);
   } finally {
     connection.release();
     await pool.end();
