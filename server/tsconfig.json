@@ -11,6 +11,6 @@
     "outDir": "./dist",
     "rootDir": "./" 
   },
-  "include": ["src/**/*", "database"],
+  "include": ["src/**/*", "database", "bin/**/*"],
   "exclude": ["node_modules"]
 }

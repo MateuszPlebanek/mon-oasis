@@ -8,8 +8,8 @@
     "start": "node dist/src/main.js",
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "db:migrate": "ts-node ./bin/migrate.ts",
-    "db:migrate:prod": "ts-node ./bin/run-sql-file.ts database/migrations/001_init.sql",
-    "db:seed:prod": "ts-node ./bin/run-sql-file.ts database/seeds/001_plants.sql"
+    "db:migrate:prod": "node dist/bin/run-sql-file.js database/migrations/001_init.sql",
+    "db:seed:prod": "node dist/bin/run-sql-file.js database/seeds/001_plants.sql"
   },
   "engines": {
     "node": "22.x"
