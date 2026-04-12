@@ -95,6 +95,14 @@ DB_NAME=mon_oasis_db
 JWT_SECRET=un_secret_tres_long
 NODE_ENV=development
 
+## Deployment
+
+The frontend is deployed on Vercel and the backend is deployed on Heroku.
+
+### Environment variables
+The project requires environment variables for authentication, database access, and frontend/backend communication.
+Sensitive values are stored in environment configuration and are not committed to the repository.
+
 📄 Licence
 
 📌 Mentions
